@@ -110,8 +110,16 @@ public class ControllerMethod
 
 			case 2: {
 				System.out.println("Enter Your Desire Model");
+				
 				String model = inputCall.getString();
-				logicCall.addMyCart(model);
+				
+				System.out.println("Enter the Number Of Items");
+				
+				System.out.println("");
+				
+				int noOfItems = inputCall.getInt();
+				
+				logicCall.addMyCart(model,noOfItems);
 
 				break;
 			}

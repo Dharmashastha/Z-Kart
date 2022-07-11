@@ -13,7 +13,6 @@ import common.HelperUtility;
 
 public class ZkartLogicLayer {
 	
-	
 	Storage storageCall = new Storage();
 
 	private Map<String, CustomerInfo> storeCustomer = new HashMap<>();
@@ -26,14 +25,13 @@ public class ZkartLogicLayer {
 	
 	List<OrderHistoryInfo> orderList = null;
 	
-	public static long invoiceNumber = 1000000;
-	
+	public static long invoiceNumber = 1000000;	
 	
 	Connected connect;
 	
 	public ZkartLogicLayer()
 	{
-		try 
+		try
 		{
 			Class<?> connectedCall = Class.forName("zkart.ZkartDbLayer");
 		
@@ -135,11 +133,11 @@ public class ZkartLogicLayer {
 		return saved.toString();
 	}
 	
-	public void addMyCart(String model) throws CustomException
+	public void addMyCart(String model,int noOfItems) throws CustomException
 	{
 		HelperUtility.checkString(model);
 		InventoryInfo inventoryCall = storeInventory.get(model);
-		myCart(inventoryCall);
+		myCart(inventoryCall,noOfItems);
 	}
 	
 	public InventoryInfo getInventoryInfo(String model) throws CustomException
@@ -148,10 +146,13 @@ public class ZkartLogicLayer {
 		return storeInventory.get(model);
 	}
 	
-	private void myCart(InventoryInfo inventory) throws CustomException
+	private void myCart(InventoryInfo inventory,int noOfItems) throws CustomException
 	{
 		nullCheckerInventory(inventory);
-		cartList.add(inventory);
+		for(int iter = 0; iter < noOfItems; iter++)
+		{
+			cartList.add(inventory);
+		}
 	}
 	
 	public List<InventoryInfo> myCartList()
